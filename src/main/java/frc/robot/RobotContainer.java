@@ -27,17 +27,21 @@ public class RobotContainer {
   private final Elevator elevator = new Elevator();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  public static XboxController lilyShade = new XboxController(0);
+  public static XboxController mainController = new XboxController(0);
 
-  private final JoystickButton elevatorUpButton = new JoystickButton(lilyShade, XboxController.Button.kY.value);
-  private final JoystickButton elevatorDownButton = new JoystickButton(lilyShade, XboxController.Button.kA.value);
-  private final JoystickButton climbUpButton = new JoystickButton(lilyShade, XboxController.Button.kX.value);
-  private final JoystickButton climbDownButton = new JoystickButton(lilyShade, XboxController.Button.kB.value);
+  private final JoystickButton elevatorUpButton = new JoystickButton(mainController, XboxController.Button.kY.value);
+  private final JoystickButton elevatorDownButton = new JoystickButton(mainController, XboxController.Button.kA.value);
+  private final JoystickButton climbUpButton = new JoystickButton(mainController, XboxController.Button.kX.value);
+  private final JoystickButton climbDownButton = new JoystickButton(mainController, XboxController.Button.kB.value);
+  private final JoystickButton runIntakeButton = new JoystickButton(mainController, XboxController.Button.kRightBumper.value);
+  
+  private final int d_pad = mainController.getPOV();
 
   private final Command elevatorUp = elevator.elevatorUp();
   private final Command elevatorDown = elevator.elevatorDown();
   private final Command climbUp = m_climb.climbUp();
   private final Command climbDown = m_climb.climbDown();
+  private final Command runIntake = elevator.runIntake();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -74,6 +78,8 @@ public class RobotContainer {
     elevatorDownButton.onTrue(elevatorDown);
     climbUpButton.whileTrue(climbUp);
     climbDownButton.whileTrue(climbDown);
+    
+    runIntakeButton.whileTrue(runIntake);
   }
 
   /**

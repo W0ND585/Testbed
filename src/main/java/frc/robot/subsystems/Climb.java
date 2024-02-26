@@ -50,6 +50,7 @@ public class Climb extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("elevator rotations", this.getElevatorRotation());
     elevatorRotations = leftClimbEncoder.getPosition();
+    
   }
 
   public double getElevatorRotation() {
